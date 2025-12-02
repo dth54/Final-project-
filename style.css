@@ -1,0 +1,411 @@
+/* Wellness palette and touchscreen-friendly defaults */
+:root{
+  /* Wellness palette: calming, vibrant, and readable */
+  --bg: #071427;        /* deep midnight teal for calm background */
+  --card-bg: #0f2a3d;   /* soft deep blue card surface */
+  --card-elev: rgba(15,42,61,0.6);
+  --text: #e6f6ff;      /* warm off-white for text */
+  --muted: #bcdff7;     /* soft muted text */
+  --accent: #4fb3ff;    /* bright sky blue accent */
+  --accent-2: #7bd389;  /* soft green accent for positive actions */
+  --sidebar-bg: #0b2230; /* deeper sidebar */
+  --btn-radius: 14px;
+  --shadow: 0 8px 24px rgba(2,12,22,0.55);
+}
+
+body {
+  background-color: var(--bg);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color: var(--text);
+  font-size: 18px; /* ensure minimum readable size */
+  line-height: 1.45;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Typography enhancements to make fonts 'pop' while staying accessible */
+.hero-heading{ font-size:2.4rem; font-weight:700; margin:0 0 10px 0; color:var(--text); letter-spacing: -0.4px; text-shadow: 0 4px 18px rgba(2,12,22,0.6); }
+.hero-intro{ color:var(--muted); font-size:1.05rem; max-width:900px; }
+
+/* Gradient headings for subtle vibrancy */
+h1.site-title, h2, h3, .result h3 { 
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight:700;
+}
+
+.topic-card h2{ font-size:1.25rem; margin-bottom:8px; }
+
+/* Important inline highlights */
+.highlight{ color:var(--accent-2); font-weight:700; }
+
+/* CTA emphasis */
+.btn{ box-shadow: 0 8px 24px rgba(79,179,255,0.08); }
+.btn.primary{ background: linear-gradient(90deg, var(--accent), #6cd0ff); color: #04202a; }
+
+/* make result text a bit more prominent */
+.result{ border-radius:12px; padding:16px; }
+.result p{ color:var(--muted); }
+
+/* small accessibility tweak: ensure gradient text has a fallback color for older browsers */
+.no-gradient h1.site-title, .no-gradient h2, .no-gradient h3 { color: var(--text); }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+li {
+  float: right;
+}
+
+li p {
+  color: var(--text);
+  text-align: center;
+  padding: 0px 16px;
+  text-decoration: none;
+}
+
+li a {
+  display: block;
+  color: var(--text);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  color: var(--accent);
+}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 85%;
+  position: relative;
+  margin: auto;
+}
+
+/* Hide slideshow images by default */
+.mySlides {
+  display: none;
+}
+
+/* Slideshow next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: var(--text);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Slideshow position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* Slideshow on hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Slideshow caption text */
+.text {
+  color: var(--muted);
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Slideshow dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: rgba(187,187,187,0.18);
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: rgba(113,113,113,0.18);
+}
+
+/* Slideshow fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 3s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+/* Columns */
+.flex-container {
+  display: flex;
+  background-color: transparent;
+}
+
+.flex-container > div {
+  background-color: var(--card-bg);
+  color: var(--text);
+  width: 50%;
+  margin: 10px;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+/* Topic cards and card-like surfaces */
+.topic-card, .card, .modal-content, .panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0));
+  border: 1px solid rgba(79,179,255,0.06);
+  border-radius: 14px;
+  padding: 18px;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+.topic-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 18px 42px rgba(2,12,22,0.55);
+  border-color: rgba(79,179,255,0.12);
+}
+
+/* Topic icons inside each card */
+.topic-icon{ width:56px; height:56px; margin-bottom:8px; display:inline-block; vertical-align:middle; }
+.topic-icon svg{ width:56px; height:56px; display:block; filter: drop-shadow(0 6px 18px rgba(2,12,22,0.45)); }
+.topic-card h2{ display:inline-block; vertical-align:middle; margin-left:12px; }
+
+/* The modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* hmmm I'm confused */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  border: 3px solid green;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: var(--card-bg);
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  width: 80%; /* Could be more or less, depending on screen size */
+  color: var(--text);
+  border-radius: 8px;
+}
+
+/*Button */
+
+.button-box {
+    display: flex;
+    height: 200px;
+  border: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+/* Touchscreen-friendly buttons */
+.button, .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent);
+  padding: 14px 26px;
+  border: none;
+  margin: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 18px;
+  color: var(--text);
+  text-align: center;
+  border-radius: var(--btn-radius);
+  min-height: 52px;
+  transition: transform 140ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.button:active, .btn:active { transform: translateY(1px); }
+
+.button.secondary, .btn.secondary{
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid rgba(79,179,255,0.10);
+}
+
+/*Hover color...not relevant for touch screen*/
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+a, a:link, a:visited {
+  color: var(--accent);
+  transition: color 160ms ease, opacity 160ms ease, text-decoration-color 160ms ease;
+}
+a:hover{ color: var(--accent-2); opacity:0.98; }
+
+/* options hover / selected */
+.opt{ transition: background-color 160ms ease, color 160ms ease, transform 120ms ease, border-color 160ms ease; }
+.opt:hover{ transform: translateY(-3px); border-color: rgba(79,179,255,0.14); }
+.opt.selected{ background: linear-gradient(90deg, rgba(79,179,255,0.10), rgba(61,162,255,0.04)); color:var(--accent); }
+
+/*Navigation */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 220px;
+  background-color: var(--sidebar-bg);
+  position: fixed;
+  height: 90vh;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: var(--text);
+  padding: 16px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.sidebar a.active {
+  background-color: rgba(61,162,255,0.08);
+  color: var(--accent);
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: rgba(255,255,255,0.02);
+  color: var(--text);
+}
+
+.maincontent {
+  margin-left: 260px;
+  padding: 1px 24px;
+  color: var(--text);
+}
+
+/* Quiz card and option styles */
+.q-card{ background: transparent; border-radius: 10px; margin-bottom: 14px; padding: 8px; }
+.q-card h3{ margin:0 0 8px 0; color:var(--text); }
+.opts{ display:flex; gap:8px; flex-wrap:wrap; }
+.opt{ background: transparent; color:var(--text); border:1px solid rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; cursor:pointer; min-height:48px; }
+.opt.selected{ background: linear-gradient(90deg, rgba(61,162,255,0.12), rgba(61,162,255,0.06)); color:var(--accent); border-color: rgba(61,162,255,0.18); }
+.explain{ margin-top:8px; color:var(--muted); }
+
+/* research note small paragraph style */
+.research-note{ margin-top:10px; color:var(--muted); font-size:0.95rem; line-height:1.4; }
+.research-note a{ color:var(--accent); text-decoration:underline; }
+
+/* Accessible focus styles: replace default white outlines with blue focus rings */
+.btn:focus, .button:focus, .opt:focus, a:focus, button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(79,179,255,0.12);
+  border-color: rgba(79,179,255,0.18);
+}
+
+/* Hero nav button entrance and hover animations */
+@keyframes floatIn {
+  from { transform: translateY(18px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+
+/* gentle pulsing after entrance */
+.nav-buttons .btn{ opacity:1; transform: none; animation: pulse 2000ms ease-in-out 0ms infinite; }
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+  100% { transform: scale(1); }
+}
+
+.nav-buttons .btn:hover{ transform: scale(1.045); box-shadow: 0 18px 40px rgba(2,12,22,0.36); }
+.btn:focus-visible, .button:focus-visible, .opt:focus-visible, a:focus-visible, button:focus-visible {
+  box-shadow: 0 0 0 4px rgba(61,162,255,0.22);
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  .maincontent {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+  
+
+/* Safety-net overrides: force dark backgrounds and readable text where inline styles or old CSS may leave white boxes */
+/* These use !important sparingly to override inline styles in the HTML. */
+.card, .topic-card, .result, .q-card, .flex-container > div, .modal-content, .topic, .panel {
+  background-color: var(--card-bg) !important;
+  color: var(--text) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Generic override for any element with inline background color */
+[style*="background"] {
+  background-color: var(--card-bg) !important;
+  color: var(--text) !important;
+}
+
+/* Buttons and links safety override */
+.btn, .button, a, button {
+  color: var(--text) !important;
+}
+
+/* Result sub-elements */
+.result p, .result li, .explain {
+  color: var(--muted) !important;
+}
+
+
+/* Last-resort global override: force non-media elements to dark backgrounds */
+body *:not(img):not(svg):not(video):not(canvas):not(iframe) {
+  background-color: var(--card-bg) !important;
+  color: var(--text) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+

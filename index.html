@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nutrition & Everyday Performance</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg: #071427;
+      --card-bg: #0f2a3d;
+      --text: #e6f6ff;
+      --muted: #bcdff7;
+      --accent: #4fb3ff;
+      --accent-2: #7bd389;
+      --shadow: 0 8px 24px rgba(2,12,22,0.55);
+    }
+
+    html,body{ height:100%; background:var(--bg); color:var(--text); }
+    body{ margin:0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+
+    /* Small page-specific adjustments */
+    .section-root{ max-width:980px; margin:18px auto; padding:18px; }
+    .topic-card{ background:var(--card-bg); border-radius:14px; padding:18px; margin-bottom:14px; box-shadow:0 6px 18px var(--shadow); color:var(--text); }
+    .topic-card h2{ margin:0 0 8px 0; font-size:1.2rem; color:var(--text); }
+    .hero-inner{ max-width:980px; margin:16px auto; }
+
+    .site-header{ padding:14px 18px; }
+    .site-title{ margin:0; color:var(--text); }
+
+    a{ color:var(--accent); }
+
+    /* Result card created by JS */
+    .result{ background:var(--card-bg); border:1px solid rgba(255,255,255,0.06); padding:12px; border-radius:10px; }
+    .result h3, .result h4{ color:var(--text); }
+    .result p, .result li{ color:var(--muted); }
+  .research-tips{ margin-top:12px; padding:12px; background:linear-gradient(180deg, rgba(61,162,255,0.04), transparent); border-radius:8px; }
+  .research-tips h4{ margin:0 0 8px 0; color:var(--text); }
+  .research-tips ul{ margin:0; padding-left:18px; color:var(--muted); }
+  .research-note{ margin-top:10px; color:var(--muted); font-size:0.95rem; line-height:1.4; }
+  /* modal for food examples */
+  .food-modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; z-index:1200; }
+  .food-modal .panel{ background:var(--card-bg); padding:18px; border-radius:10px; max-width:520px; width:90%; color:var(--text); }
+  .food-modal h3{ margin-top:0; }
+  .food-modal ul{ color:var(--muted); }
+  .food-modal .close{ float:right; background:transparent; border:none; color:var(--muted); font-size:1.1rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="site-title">Everyday Nutrition & Performance</h1>
+  </header>
+
+  <main>
+    <section class="hero hero-inner" id="home">
+      <h2 class="hero-heading">How everyday food affects how you think, feel, and sleep</h2>
+      <p class="hero-intro">What you eat and drink every day helps your brain do its job: staying focused, feeling calm, and getting good sleep. Small, regular habits — like choosing whole foods, staying hydrated, and including protein and healthy fats — add up to better thinking, steady energy, and more stable moods. Tap a topic below or try the quick quiz to learn practical tips.</p>
+
+      <nav class="nav-buttons" aria-label="Main navigation">
+        <div style="display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));">
+          <a class="btn" href="details.html#focus">Focus</a>
+          <a class="btn" href="details.html#energy">Energy</a>
+          <a class="btn" href="details.html#mood">Mood</a>
+          <a class="btn" href="details.html#sleep">Sleep</a>
+          <a class="btn" href="details.html#learn">Learn</a>
+          <a class="btn" href="quiz6.html">Quick Quiz</a>
+        </div>
+      </nav>
+    </section>
+
+    <section class="section-root" id="focus">
+      <div class="topic-card">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <circle cx="32" cy="32" r="20" fill="none" stroke="var(--accent)" stroke-width="3"/>
+            <circle cx="32" cy="32" r="8" fill="var(--accent)"/>
+            <line x1="32" y1="2" x2="32" y2="14" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" />
+            <line x1="2" y1="32" x2="14" y2="32" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <h2>Focus</h2>
+        <p>Your brain needs steady fuel to pay attention. Pick snacks and meals that combine whole carbs (like oats or whole-grain toast) with protein (eggs, yogurt, beans) so your energy and concentration stay steady instead of crashing.</p>
+        <p style="margin-top:12px;">Also keep hydrated — even mild dehydration makes it harder to focus. Small, balanced bites every few hours help you study or work longer with less fog.</p>
+  <p class="research-note">Research shows that steady blood glucose and adequate protein help maintain attention and working memory. Simple combinations (carbs + protein) and regular water intake reduce mid-study drops in concentration.</p>
+      </div>
+    </section>
+
+    <section class="section-root" id="energy">
+      <div class="topic-card">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <polygon points="34,4 22,36 34,36 18,60 46,24 34,24" fill="var(--accent-2)" />
+          </svg>
+        </div>
+        <h2>Energy</h2>
+        <p>Eating regular, balanced meals keeps your energy steady through the day. Foods with protein, fiber, and healthy fats (like nuts, beans, fish, and whole grains) help avoid sugar crashes and keep you alert.</p>
+        <p style="margin-top:8px;">After exercise or a long study block, a small snack with carbs + protein helps your body and brain recover so you have energy for the next task.</p>
+  <p class="research-note">Studies link regular balanced meals and snacks to fewer energy crashes and more consistent alertness. Including fiber and protein slows digestion, giving longer-lasting fuel than sugary snacks.</p>
+      </div>
+    </section>
+
+    <section class="section-root" id="mood">
+      <div class="topic-card">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <path d="M32 54s-22-13-22-28a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 15-22 28-22 28z" fill="var(--accent)" />
+          </svg>
+        </div>
+        <h2>Mood</h2>
+        <p>What you eat affects how you feel. Nutrients such as iron, B‑vitamins, omega‑3s, and magnesium support brain chemicals that regulate mood and motivation — when those are low, people often feel tired, irritable, or down.</p>
+        <p style="margin-top:8px;">Choose a variety of whole foods (leafy greens, fish, nuts, beans, and fortified foods) and watch for patterns like lots of sugary or highly processed snacks, which can make mood swings and low energy worse.</p>
+  <p class="research-note">Research links diets rich in whole foods, omega‑3s, and key vitamins to more stable mood and lower risk of depressive symptoms. Small daily changes (more greens, more legumes, some fish or fortified foods) can help over time.</p>
+      </div>
+    </section>
+
+  <section class="section-root" id="sleep">
+      <div class="topic-card">
+        <div class="topic-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <path d="M42 10c-1 0-3 0-5 1-8 3-12 12-9 20 3 8 12 12 20 9 1 0 3-1 4-1-6 7-18 6-25-1-9-9-6-24 6-30 2-1 5-2 9-2z" fill="var(--muted)" />
+            <polygon points="54,10 58,16 52,14 50,20 48,14 42,16 46,10 42,6 48,8 50,2 52,8" fill="var(--accent-2)" />
+          </svg>
+        </div>
+        <h2>Sleep</h2>
+        <p>Sleep is when your brain and body recover — and what you eat matters. Low levels of nutrients like magnesium and vitamin D, or diets high in sugar and processed foods, are linked to poorer sleep quality.</p>
+        <p style="margin-top:8px;">Aim for consistent bedtimes, get sunlight during the day, and include foods with magnesium, vitamin D, and omega‑3s to support better rest and recovery.</p>
+    <p class="research-note">Evidence shows nutrients like magnesium and vitamin D, as well as overall diet quality, relate to sleep timing and quality. Avoiding heavy sugary meals close to bedtime and keeping a regular sleep schedule supports deeper rest.</p>
+      </div>
+    </section>
+
+    <section class="section-root" id="quiz">
+      <div class="topic-card">
+        <h2>Quick 6‑Question Quiz</h2>
+        <p>Reflect on simple habits. Results are educational, not medical.</p>
+
+        <div id="questions"></div>
+
+        <div style="display:flex; gap:12px; margin-top:12px;">
+          <button id="submit" class="btn">Get Feedback</button>
+          <button id="reset" class="btn secondary">Reset</button>
+        </div>
+
+        <div id="output" style="margin-top:12px"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Practical, friendly tips — not medical advice. Sources: Harvard Nutrition, Sleep Foundation.</p>
+  </footer>
+
+  <script>
+  // Load quiz from content/quiz.json and show explanations + 'Learn more' links
+  async function initQuiz(){
+    const resp = await fetch('content/quiz.json');
+    const data = await resp.json();
+    const qs = data.questions;
+    const container = document.getElementById('questions');
+
+    // build a question-id -> area map from the quiz data when possible
+    // fall back to a small default map for common ids
+    const qToArea = {};
+    qs.forEach(q => {
+      if(!q || !q.id) return;
+      if(q.area) qToArea[q.id] = q.area;
+      else if(q.topic) qToArea[q.id] = q.topic;
+      else if(q.id in { breakfast:1, protein:1, sleep:1, hydration:1 }) qToArea[q.id] = (q.id === 'sleep' ? 'sleep' : (q.id === 'hydration' ? 'energy' : 'focus'));
+    });
+
+    qs.forEach((q, idx)=>{
+      const card = document.createElement('div'); card.className='q-card';
+      const h = document.createElement('h3'); h.textContent = (idx+1)+'. '+q.text; card.appendChild(h);
+      const opts = document.createElement('div'); opts.className='opts';
+
+      q.options.forEach(opt=>{
+        const b = document.createElement('button'); b.type='button'; b.className='opt'; b.textContent = opt.label;
+        b.addEventListener('click', ()=>{
+          opts.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));
+          b.classList.add('selected');
+          // show explanation and learn more
+          let ex = card.querySelector('.explain');
+          if(!ex){ ex = document.createElement('div'); ex.className='explain'; ex.style.marginTop='8px'; card.appendChild(ex); }
+          ex.innerHTML = `<p style="margin:0">${q.explain || ''}</p><p style="margin-top:6px"><a class="btn secondary" href="#${qToArea[q.id] || 'learn'}">Learn more</a></p>`;
+        });
+        opts.appendChild(b);
+      });
+
+      card.appendChild(opts);
+      container.appendChild(card);
+    });
+
+    document.getElementById('submit').addEventListener('click', ()=>{
+      let total=0; let answered=0;
+      const cards = document.querySelectorAll('.q-card');
+
+      // per-area scoring accumulator
+      const areaScores = {}; // e.g., { focus: 3, energy: 5 }
+
+      cards.forEach((card, i)=>{
+        const sel = card.querySelector('.opt.selected');
+        if(sel){
+          answered++;
+          const q = qs[i];
+          const opt = q.options.find(o=>o.label===sel.textContent);
+          if(opt && q.scores && q.scores[opt.value]!=null) {
+            const v = q.scores[opt.value];
+            total += v;
+            const area = qToArea[q.id] || 'general';
+            areaScores[area] = (areaScores[area] || 0) + v;
+          }
+        }
+      });
+      if(answered < qs.length){ alert('Please answer all questions.'); return; }
+
+      const range = data.scoring.ranges.find(r=> total>=r.min && total<=r.max) || data.scoring.ranges[0];
+      const sources = (data.sources || []).map(s=>`<li><a href="${s.url}" target="_blank">${s.name}</a></li>`).join('');
+      const out = document.getElementById('output');
+      const resultHtml = `<div class="result"><h3>${range.label}</h3><p>${range.advice}</p><p><strong>Score:</strong> ${total}</p><h4>Sources</h4><ul>${sources}</ul></div>`;
+
+      // find lowest-scoring area(s)
+      const areas = Object.keys(areaScores);
+      let tipsHtml = '';
+      if(areas.length){
+        // compute min score value
+        const minVal = Math.min(...areas.map(a=>areaScores[a]));
+        const weakest = areas.filter(a=> areaScores[a] === minVal);
+
+  const tipMap = {
+          focus: '<li><strong>Focus:</strong> Try combining whole carbs and protein (e.g., oats + yogurt, whole-grain toast + eggs). Action: have a balanced snack before study and keep water handy.</li>',
+          energy: '<li><strong>Energy:</strong> Eat regular meals with protein, fiber, and healthy fats (nuts, beans, fish) to avoid crashes. Action: pack a small carb+protein snack after workouts or long classes.</li>',
+          mood: '<li><strong>Mood:</strong> Include nutrient-dense foods (leafy greens, lentils, oily fish, fortified cereals) for iron, B‑vitamins, and omega‑3s. Action: add a serving of greens or a handful of nuts daily.</li>',
+          sleep: '<li><strong>Sleep:</strong> Focus on magnesium-rich foods (spinach, pumpkin seeds), vitamin D sources (sunlight, fortified dairy), and omega‑3s. Action: keep a consistent bedtime and avoid heavy sugary meals before bed.</li>',
+          general: '<li>Try balanced meals, hydration, and regular sleep — these basics support focus, energy, mood, and recovery.</li>'
+        };
+
+        // show top 2 weakest areas (or fewer if less present)
+        const sorted = areas.sort((a,b)=> areaScores[a] - areaScores[b]);
+        const topTwo = sorted.slice(0,2);
+        tipsHtml = '<div class="research-tips"><h4>Personalized tips</h4><ul>' + topTwo.map(a=> tipMap[a] || tipMap.general).join('') + '</ul>' +
+          '<p style="margin-top:8px; color:var(--muted);">Tap "Food examples" for simple foods to try.</p>' +
+          '<div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">' + topTwo.map(a=>`<button class="btn secondary" onclick="showFoods('${a}')">Food examples: ${a}</button>`).join('') + '</div>' +
+          '<p style="margin-top:8px; color:var(--muted);">If symptoms (tiredness, mood changes, trouble concentrating) persist, consider discussing nutrient checks like iron or vitamin D with a healthcare provider.</p></div>';
+      }
+
+      out.innerHTML = resultHtml + tipsHtml;
+    });
+
+    document.getElementById('reset').addEventListener('click', ()=>{ document.querySelectorAll('.opt.selected').forEach(b=>b.classList.remove('selected')); document.getElementById('output').innerHTML=''; });
+  }
+
+  initQuiz();
+  </script>
+
+  <!-- Food examples modal -->
+  <div id="foodModal" class="food-modal" role="dialog" aria-hidden="true">
+    <div class="panel">
+      <button class="close" onclick="closeFoods()">✕</button>
+      <h3 id="foodTitle">Food examples</h3>
+      <div id="foodContent"></div>
+    </div>
+  </div>
+
+  <script>
+  function showFoods(area){
+    const lists = {
+      focus: { title: 'Foods to support focus', items: ['Oats + yogurt', 'Whole-grain toast + eggs', 'Banana + nut butter'] },
+      energy: { title: 'Foods to support energy', items: ['Greek yogurt + fruit', 'Trail mix (nuts + seeds)', 'Brown rice + beans'] },
+      mood: { title: 'Foods to support mood', items: ['Leafy greens', 'Lentils & beans', 'Oily fish (salmon)'] },
+      sleep: { title: 'Foods to support sleep', items: ['Spinach & pumpkin seeds', 'Fortified dairy or sunlight for vitamin D', 'Walnuts or chia seeds (omega‑3s)'] },
+      general: { title: 'Healthy basics', items: ['Water, whole fruits, mixed nuts, whole grains'] }
+    };
+    const data = lists[area] || lists.general;
+    document.getElementById('foodTitle').textContent = data.title;
+    document.getElementById('foodContent').innerHTML = '<ul>' + data.items.map(i=>`<li>${i}</li>`).join('') + '</ul>' + '<div style="margin-top:8px"><button class="btn" onclick="closeFoods()">Close</button></div>';
+    const m = document.getElementById('foodModal');
+    m.style.display = 'flex'; m.setAttribute('aria-hidden','false');
+  }
+  function closeFoods(){ const m = document.getElementById('foodModal'); m.style.display='none'; m.setAttribute('aria-hidden','true'); }
+  </script>
+
+</body>
+</html>

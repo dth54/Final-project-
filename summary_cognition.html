@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nutrition & Cognitive Performance</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg: #000000; /* page background */
+      --card-bg: #0f0f12; /* slightly lighter than black for cards */
+      --text: #ffffff; /* primary text */
+      --muted: #cfd8ff; /* light blue for muted text */
+      --accent: #3da2ff; /* blue accent for links/buttons */
+      --shadow: rgba(0,0,0,0.6);
+    }
+
+    html,body{ height:100%; background:var(--bg); color:var(--text); }
+    body{ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; }
+
+    .summary-root{ max-width:980px; margin:18px auto; padding:18px; }
+    .card{ background:var(--card-bg); border-radius:14px; padding:18px; margin-bottom:14px; box-shadow:0 6px 18px var(--shadow); color:var(--text); }
+    .card h2{ margin:0 0 8px 0; font-size:1.3rem; color:var(--text); }
+    .card p{ margin:0; color:var(--muted); font-size:1.05rem; }
+
+    /* Ensure lists inherit readable colors and spacing */
+    .card ul, .card ol{ color:var(--text); }
+    .card ul li strong, .card ol li strong{ color:var(--text); }
+
+    .site-header{ padding:14px 18px; display:flex; align-items:center; gap:12px; }
+    .site-title{ margin:0; font-size:1.2rem; color:var(--text); }
+    .back-link{ color:var(--accent); text-decoration:none; font-weight:600; }
+
+    a{ color:var(--accent); }
+
+    .big-cta{ display:flex; gap:12px; margin-top:12px; }
+    .big-cta .btn{ flex:1; font-size:1.05rem; padding:16px; background:transparent; color:var(--text); border-radius:10px; border:1px solid rgba(255,255,255,0.08); text-align:center; text-decoration:none; display:inline-block; }
+    .big-cta .btn.secondary{ background:linear-gradient(90deg, rgba(61,162,255,0.12), rgba(61,162,255,0.06)); color:var(--accent); border:1px solid rgba(61,162,255,0.15); }
+
+    /* Override any inline color styles used in lists in this document */
+    ul[style], ol[style]{ color:var(--text) !important; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="back-link" href="index.html">⟵ Home</a>
+    <h1 class="site-title">Nutrition & Cognitive Performance</h1>
+  </header>
+
+  <main class="summary-root">
+    <section class="card">
+      <h2>Why nutrition matters for thinking</h2>
+      <p>What you eat affects how your brain gets steady energy, regulates mood, and recovers from stress or study sessions. Small, consistent choices make a big difference.</p>
+    </section>
+
+    <section class="card">
+      <h2>Key ideas</h2>
+      <ul style="margin-top:6px; padding-left:18px; color:var(--text); font-size:1.05rem;">
+        <li><strong>Energy & glucose:</strong> Combine whole carbs with protein to avoid crashes.</li>
+        <li><strong>Protein & satiety:</strong> Protein at meals helps steady attention and reduces overeating.</li>
+        <li><strong>Healthy fats:</strong> Omega-3s support brain function and may help sleep quality.</li>
+        <li><strong>Hydration:</strong> Even mild dehydration reduces focus — sip water regularly.</li>
+        <li><strong>Sleep & recovery:</strong> Sleep is essential for memory and mood; nutrients like magnesium and vitamin D relate to sleep quality.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Quick practical tips</h2>
+      <ol style="margin-top:6px; padding-left:18px; font-size:1.05rem;">
+        <li>Start with a protein + whole grain at breakfast (e.g., yogurt + oats).</li>
+        <li>Bring a water bottle and sip often during study or work.</li>
+        <li>Include a serving of fatty fish, nuts, or seeds a few times per week for omega-3s.</li>
+      </ol>
+    </section>
+
+    <div class="big-cta">
+      <a class="btn" href="quiz6.html">Take the 6‑question quiz</a>
+      <a class="btn secondary" href="menuPage1.html">Fuel for Focus</a>
+    </div>
+  </main>
+</body>
+</html>
