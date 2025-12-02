@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Topic details</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .details-root{ max-width:980px; margin:18px auto; padding:18px; }
+    .hero{ margin-bottom:12px; }
+    .card{ background:#fff; border-radius:12px; padding:16px; margin-bottom:12px; box-shadow:0 6px 18px rgba(30,40,40,0.06); }
+    .micronutrient{ padding:10px; background:#f7fffb; border-radius:10px; margin-bottom:8px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="back-link" href="index.html">⟵ Home</a>
+    <h1 class="site-title" id="topic-title">Topic</h1>
+  </header>
+
+  <main class="details-root">
+    <div class="card" id="summary"></div>
+    <div class="card" id="findings"><h3>Findings</h3><ul id="find-list"></ul></div>
+    <div class="card" id="micros"><h3>Micronutrients to check</h3><div id="micro-list"></div></div>
+    <div class="card" id="foods"><h3>Food suggestions</h3><p id="suggestions"></p></div>
+  <div class="card" id="sources-card" style="display:none"><h3>Sources</h3><ul id="source-list"></ul></div>
+    <div class="card"><a class="btn" href="quiz6.html">Take the quiz</a></div>
+  </main>
+
+<script>
+async function loadTopic(){
+  const resp = await fetch('content/topics.json');
+  const data = await resp.json();
+  const hash = (location.hash || '#learn').slice(1);
+  const topic = data.areas[hash] || data.areas['learn'];
+
+  document.getElementById('topic-title').textContent = topic.title;
+  document.getElementById('summary').textContent = topic.summary;
+
+  const findList = document.getElementById('find-list'); findList.innerHTML='';
+  topic.findings.forEach(f=>{ const li = document.createElement('li'); li.textContent=f; findList.appendChild(li); });
+
+  const microList = document.getElementById('micro-list'); microList.innerHTML='';
+  topic.micronutrients.forEach(m=>{
+    const d = document.createElement('div'); d.className='micronutrient';
+    d.innerHTML = `<strong>${m.name}</strong><p style="margin:6px 0">${m.role}</p><p><em>Foods:</em> ${m.foods}</p>`;
+    microList.appendChild(d);
+  });
+
+  document.getElementById('suggestions').textContent = topic.suggestions || '';
+  // render sources if any
+  const sourcesCard = document.getElementById('sources-card');
+  const sourceList = document.getElementById('source-list');
+  if(topic.sources && topic.sources.length){
+    sourcesCard.style.display = '';
+    sourceList.innerHTML = '';
+    topic.sources.forEach(s=>{
+      const li = document.createElement('li');
+      const a = document.createElement('a'); a.href = s.link; a.textContent = s.cite; a.target = '_blank';
+      li.appendChild(a); sourceList.appendChild(li);
+    });
+  } else { sourcesCard.style.display = 'none'; }
+}
+
+window.addEventListener('hashchange', loadTopic);
+loadTopic();
+</script>
+</body>
+</html>

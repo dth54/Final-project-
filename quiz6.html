@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>6‑Question Quiz — Nutrition & Performance</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .quiz-root{ max-width:980px; margin:18px auto; padding:18px; background:#fff; border-radius:12px; }
+    .q-card{ padding:14px; margin-bottom:12px; border-radius:10px; background:#f8fdfb; }
+    .opts{ display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+    .opt{ padding:12px; border-radius:10px; background:white; border:1px solid rgba(11,35,48,0.06); font-size:1rem; }
+    .opt.selected{ box-shadow:0 2px 8px rgba(42,143,122,0.12); border-color: rgba(42,143,122,0.2); }
+    .result{ margin-top:12px; padding:12px; border-radius:10px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="back-link" href="index.html">⟵ Home</a>
+    <h1 class="page-title">Quick 6‑Question Quiz</h1>
+  </header>
+
+  <main class="quiz-root" id="root">
+    <p>Answer a few simple questions about your habits. Results are educational and non-medical.</p>
+
+    <!-- Questions will be injected here -->
+    <div id="questions"></div>
+
+    <div style="display:flex; gap:12px; margin-top:12px;">
+      <button id="submit" class="btn">Get Feedback</button>
+      <button id="reset" class="btn secondary">Reset</button>
+    </div>
+
+    <div id="output"></div>
+  </main>
+
+  <script>
+  // Load questions from content/quiz.json
+  async function init(){
+    const resp = await fetch('content/quiz.json');
+    const data = await resp.json();
+    const qs = data.questions;
+    const container = document.getElementById('questions');
+
+    qs.forEach((q, idx)=>{
+      const card = document.createElement('div'); card.className='q-card';
+      const h = document.createElement('h3'); h.textContent = (idx+1)+'. '+q.text; card.appendChild(h);
+      const opts = document.createElement('div'); opts.className='opts';
+
+      q.options.forEach(opt=>{
+        const b = document.createElement('button'); b.type='button'; b.className='opt'; b.textContent = opt.label;
+        b.addEventListener('click', ()=>{
+          opts.querySelectorAll('.opt').forEach(x=>x.classList.remove('selected'));
+          b.classList.add('selected');
+          // show explanation
+          let ex = card.querySelector('.explain');
+          if(!ex){ ex = document.createElement('p'); ex.className='explain'; ex.style.marginTop='8px'; card.appendChild(ex); }
+          ex.textContent = q.explain || '';
+        });
+        opts.appendChild(b);
+      });
+
+      card.appendChild(opts);
+      container.appendChild(card);
+    });
+
+    document.getElementById('submit').addEventListener('click', ()=>{
+      let total=0; let answered=0;
+      const cards = document.querySelectorAll('.q-card');
+      cards.forEach((card, i)=>{
+        const sel = card.querySelector('.opt.selected');
+        if(sel){ answered++; const q = qs[i]; const opt = q.options.find(o=>o.label===sel.textContent); if(opt && q.scores && q.scores[opt.value]!=null) total += q.scores[opt.value]; }
+      });
+      if(answered < qs.length){ alert('Please answer all questions.'); return; }
+
+      // find scoring range
+      const range = data.scoring.ranges.find(r=> total>=r.min && total<=r.max) || data.scoring.ranges[0];
+      const out = document.getElementById('output');
+      // sources
+      const sources = (data.sources || []).map(s=>`<li><a href="${s.url}" target="_blank">${s.name}</a></li>`).join('');
+      out.innerHTML = `<div class="result" style="background:#eef7f5; border:1px solid rgba(42,143,122,0.08)"><h3>${range.label}</h3><p>${range.advice}</p><p><strong>Score:</strong> ${total}</p><h4>Sources</h4><ul>${sources}</ul></div>`;
+    });
+
+    document.getElementById('reset').addEventListener('click', ()=>{ document.querySelectorAll('.opt.selected').forEach(b=>b.classList.remove('selected')); document.getElementById('output').innerHTML=''; });
+  }
+
+  init();
+  </script>
+
+</body>
+</html>

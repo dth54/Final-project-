@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting…</title>
+    <meta http-equiv="refresh" content="0;url=quiz6.html">
+  </head>
+  <body>
+    <p>If you are not redirected automatically, <a href="quiz6.html">click here to open the quiz</a>.</p>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quick Quiz — Nutrition & Performance</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .quiz-card{ max-width:900px; margin: 18px auto; padding:18px; background:#fff; border-radius:12px; }
+    .question{ margin-bottom:14px; }
+    .options{ display:flex; flex-direction:column; gap:10px; }
+    .option-btn{ padding:14px; border-radius:10px; border:1px solid rgba(11,35,48,0.06); background:#f6fbf9; cursor:pointer; }
+    .option-btn.selected{ outline:3px solid rgba(42,143,122,0.14); }
+    .result{ padding:14px; border-radius:10px; margin-top:16px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="back-link" href="index.html">⟵ Home</a>
+    <h1 class="page-title">Quick Quiz</h1>
+  </header>
+
+  <main class="content quiz-card" id="quiz-root">
+    <p id="intro"></p>
+    <div id="questions"></div>
+    <div style="display:flex; gap:12px; margin-top:16px;">
+      <button id="submit" class="btn">Get Feedback</button>
+      <button id="reset" class="btn secondary">Reset</button>
+    </div>
+    <div id="output"></div>
+  </main>
+
+<script>
+async function loadQuiz(){
+  const resp = await fetch('content/quiz.json');
+  const data = await resp.json();
+  document.getElementById('intro').textContent = data.intro;
+
+  const container = document.getElementById('questions');
+  data.questions.forEach((q, idx)=>{
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+    const qh = document.createElement('h3'); qh.textContent = (idx+1)+'. '+q.text;
+    qDiv.appendChild(qh);
+    const opts = document.createElement('div'); opts.className = 'options';
+
+    q.options.forEach(opt=>{
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+      btn.textContent = opt.label;
+      btn.dataset.qid = q.id;
+      btn.dataset.value = opt.value;
+      btn.addEventListener('click', ()=>{
+        // deselect others for this question
+        container.querySelectorAll(`button[data-qid="${q.id}"]`).forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+      opts.appendChild(btn);
+    });
+
+    qDiv.appendChild(opts);
+    container.appendChild(qDiv);
+  });
+
+  // submit handler
+  document.getElementById('submit').addEventListener('click', ()=>{
+    const answers = {};
+    data.questions.forEach(q=>{
+      const sel = container.querySelector(`button[data-qid="${q.id}"].selected`);
+      if(sel) answers[q.id] = sel.dataset.value;
+    });
+    // score
+    let score=0;
+    data.questions.forEach(q=>{
+      const v = answers[q.id];
+      if(v && q.scores[v]!=null) score += q.scores[v];
+    });
+
+    // find range
+    const range = data.scoring.ranges.find(r=> score>=r.min && score<=r.max) || data.scoring.ranges[0];
+    const out = document.getElementById('output');
+    out.innerHTML = `<div class="result" style="background: #eef7f5; border:1px solid rgba(42,143,122,0.08)"><h3>${range.label}</h3><p>${range.advice}</p><p><strong>Your score:</strong> ${score}</p></div>`;
+
+  });
+
+  document.getElementById('reset').addEventListener('click', ()=>{
+    container.querySelectorAll('.selected').forEach(b=>b.classList.remove('selected'));
+    document.getElementById('output').innerHTML='';
+  });
+}
+
+loadQuiz();
+</script>
+</body>
+</html>
