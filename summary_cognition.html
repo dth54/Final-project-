@@ -6,39 +6,12 @@
   <title>Nutrition & Cognitive Performance</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    :root{
-      --bg: #000000; /* page background */
-      --card-bg: #0f0f12; /* slightly lighter than black for cards */
-      --text: #ffffff; /* primary text */
-      --muted: #cfd8ff; /* light blue for muted text */
-      --accent: #3da2ff; /* blue accent for links/buttons */
-      --shadow: rgba(0,0,0,0.6);
-    }
-
-    html,body{ height:100%; background:var(--bg); color:var(--text); }
-    body{ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; }
-
     .summary-root{ max-width:980px; margin:18px auto; padding:18px; }
-    .card{ background:var(--card-bg); border-radius:14px; padding:18px; margin-bottom:14px; box-shadow:0 6px 18px var(--shadow); color:var(--text); }
-    .card h2{ margin:0 0 8px 0; font-size:1.3rem; color:var(--text); }
+    .card{ background:#fff; border-radius:14px; padding:18px; margin-bottom:14px; box-shadow:0 6px 18px rgba(30,40,40,0.06); }
+    .card h2{ margin:0 0 8px 0; font-size:1.3rem; }
     .card p{ margin:0; color:var(--muted); font-size:1.05rem; }
-
-    /* Ensure lists inherit readable colors and spacing */
-    .card ul, .card ol{ color:var(--text); }
-    .card ul li strong, .card ol li strong{ color:var(--text); }
-
-    .site-header{ padding:14px 18px; display:flex; align-items:center; gap:12px; }
-    .site-title{ margin:0; font-size:1.2rem; color:var(--text); }
-    .back-link{ color:var(--accent); text-decoration:none; font-weight:600; }
-
-    a{ color:var(--accent); }
-
     .big-cta{ display:flex; gap:12px; margin-top:12px; }
-    .big-cta .btn{ flex:1; font-size:1.05rem; padding:16px; background:transparent; color:var(--text); border-radius:10px; border:1px solid rgba(255,255,255,0.08); text-align:center; text-decoration:none; display:inline-block; }
-    .big-cta .btn.secondary{ background:linear-gradient(90deg, rgba(61,162,255,0.12), rgba(61,162,255,0.06)); color:var(--accent); border:1px solid rgba(61,162,255,0.15); }
-
-    /* Override any inline color styles used in lists in this document */
-    ul[style], ol[style]{ color:var(--text) !important; }
+    .big-cta .btn{ flex:1; font-size:1.05rem; padding:16px; }
   </style>
 </head>
 <body>
